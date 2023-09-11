@@ -1,0 +1,50 @@
+<%-include("./partials/admin-top.ejs")%>
+      <center>
+<div class="col-9 col-md-4 ">
+    <h3 class="head">Edit - <strong><%=product.name%></strong></h3>
+          <form action="/admin/edit/<%=product._id%>/product" method="post">
+ <label for="category">Normal Price(in Naira)</label>
+     <div class="form-group">
+  <input type="number" name="oldPrice" class="form-control" required value="<%=product.oldPrice%>">            
+               </div>
+ <label for="category">Discount Price(in Naira)</label>
+     <div class="form-group">
+  <input type="number" name="price" class="form-control" value="<%=product.price%>" required>               
+               </div>
+ <label for="category">Available quantity</label>
+       <div class="form-group">
+  <input type="number" name="available" class="form-control" value="<%=product.available%>" required>                
+               </div>    
+    <div class="form-group">
+         <p>Product description</p>
+  <textarea name="description" class="are form-control" required style="height: 500px;"><%=product.description%></textarea>            
+               </div> 
+               <p></p>
+   <div class="form-group">
+                     
+       </div>  
+   <div class="specification col-md-4">
+            <p class="text-Lfont text-nowrap">Edit Product specifications below</p>
+            <p></p>
+      <div class="specidiv"><h5>Property. Eg- size</h5> <h5 class="mr-56 bt56">Specication. Eg-20cm</h5></div>
+         <%product.specifications.forEach(function(specify,index){%> 
+          <div class="specidiv"><input type="text" name="speci<%=index + 1%>" value="<%=specify.property%>"> <input type="text" name="quality<%=index + 1%>" class="mr-56" value="<%=specify.specify%>"></div>
+        <%})%>
+      </div>
+          <p></p>
+          <div class="form-group">   
+            <P class="text-center">Select new category</p>
+             <select name="Category" required>
+         <option><%=product.Category%></option>
+               <% categories.forEach(function(category){%>
+            <option><%=category.name%></option>
+                   <%})%>
+              </select>                      
+            </div>
+          <p></p>
+  <button type= "submit" class="form-control btn btn-warning btn-sm">Update</button>  
+      </form>
+   </div>
+
+</center>
+<%-include("./partials/admin-down.ejs")%>

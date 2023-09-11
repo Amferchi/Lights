@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Light's o'clock</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/stylesheet/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Libraries Stylesheet -->
+    <link href="/stylesheet/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/stylesheet/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/stylesheet/css/style.css" rel="stylesheet" crossorigin="anonymous">
+   
+</head>
+
+<body class="jumbo">
+    <div class="container">
+        <%if(error && error.length > 0 ){%>  
+             <div class="alert alert-danger flash text-center"><%=error%></div>
+             <%}%>
+            <%if(success && success.length > 0 ){%>
+                <div class="alert alert-success flash text-center"><%=success%></div>
+             <%}%>
+        </div>
+        <br>
+        <br>
+        <br>
+<div class="container">
+    <div >
+       <center>
+ <img src="\files\logo.jpg" class="logo-lo">
+   <br>
+   <br>
+   <br>
+  <div class="img-thumbnail wbwidthl col-9 col-md-4">
+     <p id="log">Sign in with one tap</p>
+     <a href="/auth/google"><img src="\files\google_signin_buttons\web\1x\btn_google_signin_light_normal_web.png"></button></a>
+ </div>
+   </center> 
+   </div>
+    </div>
+   <style>
+    .logo-lo{
+       width: 250px;
+       height:100px;
+       padding:0;
+    }
+
+    button:focus{
+        outline: none;
+    }
+    .wbwidthl{
+        height: 200px;
+        border-radius: 15px;
+    }
+   </style>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="/stylesheet/lib/easing/easing.min.js"></script>
+        <script src="/stylesheet/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="/stylesheet/js/main.js"></script>
+    </body>
+    
+    </html>

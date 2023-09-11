@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Admin panel </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Admin panel" name="keywords">
+    <meta content="in control" name="description">
+
+    <!-- Favicon -->
+    <link href="/stylesheet/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="stylesheet" href="/stylesheet/css/style.css">
+    <link rel="stylesheet" href="/stylesheet/css/admin.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/stylesheet/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/stylesheet/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+        <!-- navbar -->
+        <!-- ============================================================== -->
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand text-capitalize text-dark" href="/">LIGHTS O' CLOCK</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-right-top">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                              <form action="/admin/234crvS554#" method="get">
+                                <input class="form-control" type="text" placeholder="Search.." name="search">
+                             </form>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown nav-user">
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<%=user.photos[0].value%>" alt="" class="user-avatar-md rounded-circle"></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                                <div class="nav-user-info">
+                                    <h5 class="mb-0 text-white nav-user-name"><%=user.displayName%></h5>
+                                    <span class="status"></span><span class="ml-2">Available</span>
+                                </div>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="/logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end navbar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Menu
+                            </li>
+                            <li class="nav-item ">
+                              <a class="nav-link active" href="/admin/234crvS554#" ><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>#
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/admin/product/add">Add product<span class="badge badge-success">6</span></a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/admin/category/create">Add category<span class="badge badge-success">6</span></a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/admin/pending-orders">Pending Orders<span class="badge badge-success">6</span></a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/admin/view/admin">Other admins<span class="badge badge-success">6</span></a>
+                            </li>
+                                
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/admin/support/tickets">support<span class="badge badge-success">6</span></a>
+                            </li>      
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/admin/payment-accounts">Payment accounts<span class="badge badge-success">6</span></a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="https://privateemail.com/">Email dashboard<span class="badge badge-success">6</span></a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="/admin/state-delivery-prices">delivery<span class="badge badge-success">6</span></a>
+                            </li>                                                                 
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <style>
+            .nav-link{
+                color:white !important;
+            }
+        </style>
+        <div class="container flash">
+            <%if(error && error.length > 0 ){%>  
+                 <div class="alert alert-danger"><%=error%></div>
+                 <%}%>
+                <%if(success && success.length > 0 ){%>
+                    <div class="alert alert-success flash"><%=success%></div>
+                 <%}%>
+            </div>

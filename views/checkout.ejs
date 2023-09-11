@@ -1,0 +1,140 @@
+<%- include('partials/header.ejs')%>
+
+
+    <!-- Breadcrumb Start -->
+    <%if(cart.items.length > 0){%>
+        <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                <div class="bg-light p-30 mb-5">
+            <form action="/confirm-orders/<%=cart.id%>"  method="post">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>First Name</label>
+                            <input class="form-control" name="firstName" type="text" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" name="lastName" type="text" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" name="email" type="text" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" name="mobile" type="number" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address Line</label>
+                            <input class="form-control" name="address" type="text" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <select name="state" class="form-control text-bfont" required>
+                                <option value="" disabled selected>Select State</option>
+                                <option value="Abia">Abia</option>
+                                <option value="Adamawa">Adamawa</option>
+                                <option value="Akwa Ibom">Akwa Ibom</option>
+                                <option value="Anambra">Anambra</option>
+                                <option value="Bauchi">Bauchi</option>
+                                <option value="Bayelsa">Bayelsa</option>
+                                <option value="Benue">Benue</option>
+                                <option value="Borno">Borno</option>
+                                <option value="Cross River">Cross River</option>
+                                <option value="Delta">Delta</option>
+                                <option value="Ebonyi">Ebonyi</option>
+                                <option value="Edo">Edo</option>
+                                <option value="Ekiti">Ekiti</option>
+                                <option value="Enugu">Enugu</option>
+                                <option value="FCT">Federal Capital Territory</option>
+                                <option value="Gombe">Gombe</option>
+                                <option value="Imo">Imo</option>
+                                <option value="Jigawa">Jigawa</option>
+                                <option value="Kaduna">Kaduna</option>
+                                <option value="Kano">Kano</option>
+                                <option value="Katsina">Katsina</option>
+                                <option value="Kebbi">Kebbi</option>
+                                <option value="Kogi">Kogi</option>
+                                <option value="Kwara">Kwara</option>
+                                <option value="Lagos">Lagos</option>
+                                <option value="Nasarawa">Nasarawa</option>
+                                <option value="Niger">Niger</option>
+                                <option value="Ogun">Ogun</option>
+                                <option value="Ondo">Ondo</option>
+                                <option value="Osun">Osun</option>
+                                <option value="Oyo">Oyo</option>
+                                <option value="Plateau">Plateau</option>
+                                <option value="Rivers">Rivers</option>
+                                <option value="Sokoto">Sokoto</option>
+                                <option value="Taraba">Taraba</option>
+                                <option value="Yobe">Yobe</option>
+                                <option value="Zamfara">Zamfara</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" name="city" type="text" required>
+                        </div>
+                    </div>
+                 
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom">
+                        <h6 class="mb-3">Products</h6>
+             <%cart.items.forEach(function(item){%>
+                        <div class="d-flex justify-content-between">
+                            <p><%=item.name %></p>
+                            <p><%=item.quantity%> pieces</p>
+                            <p><%=currency%><%=item.price%></p>
+                        </div>
+                        <%})%>
+                    </div>
+                    <div class="border-bottom pt-3 pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Subtotal</h6>
+                            <h6><%=currency%><%=cart.items.reduce((acc,obj)=>{
+                                return acc + obj.price
+                             },0) %></h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Total</h5>
+                            <% let sum = 0; %>
+                            <% cart.items.forEach(obj => { sum += obj.price; }); %>
+                            <h5><%=currency%><%=sum%></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment Method</span></h5>
+                    <div class="bg-light p-30">
+                        <div class="form-group mb-4">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer" required>
+                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                            </div>
+                        </div> 
+                 <button class="btn btn-block btn-primary font-weight-bold py-3 btn-bd-ra">Place Order</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <%}else{%>
+        <center>
+        <h1>Add products to your cart then return to this page</h1>
+        <br>
+        <button class="btn btn-bd-ra btn-info">Start Shopping</button>
+    </center>
+        <%}%>
+
+    <!-- Checkout End -->
+
+    <%- include('partials/footer.ejs')%>

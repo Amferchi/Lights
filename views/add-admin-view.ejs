@@ -1,0 +1,56 @@
+<%-include("./partials/admin-top.ejs")%>
+<div class="container">
+    <center>
+        <br>
+       
+               <h2>Admins on this site</h2>
+               <br>
+            <% admins.forEach(function(admin,index){%>
+            <div class="jumbotron col-9 col-md-4 contain">
+                <h6><strong>Name:</strong> <%=admin.name%></h6>
+                <h6><strong>Email:</strong> <%=admin.email%></h6>
+                  <% var popupId = "popup-" + index; %>
+                  <!-- add unique ID to pop-up element -->
+                  <%if(headadmin){%>
+                         <div id="<%= popupId %>" class="popup form-delete">
+                                   <h5 class="text-Lfont">Are you sure you want to remove this admin?</h5>
+                                   <h5>Removing this admin would also restrict his access to this admin panel</h5>
+                              <form action="/admin/delete/<%=admin._id%>/admin" method="post">
+                                  <button type="button" class="btn-sm btn-bd-ra btn btn-outline-dark" onclick="closeDeletePopup('<%= popupId %>')">Cancel</button>
+                                 <button class="btn btn-danger btn-bd-ra con-ord-btn btn-sm" type="submit">Remove</button>
+                              </form>            
+                        </div>
+                  <button class="text-center btn-danger btn-bd-ra con-ord-btn btn-sm btn-delete" onclick="toggleDeletePopup('<%= popupId %>')">Remove</button>
+                    <%}%>
+                </div>  
+            <%})%>
+     <%if(headadmin){%>
+        <div class="col-9 col-md-4  contain">
+            <h3 class="head"> Add new admin</h3>
+         <form class="" action="/admin/new-admin" method="post">
+                <label>Name</label>
+               <input type="text" placeholder="Name" name="admin[name]" class="form-control" required>
+               <label>Email</label>
+               <input type="text" placeholder="Email address" name="admin[email]" class="form-control" required>
+               <label>Title</label>
+               <select name="admin[tag]" class="form-control">
+                <option value="" selected>Select title</option>
+                <option>Creator</option>
+                <option>headadmin</option>
+               </select>
+               <p></p>
+          <div class="popuptext" id="addAdmin">
+              <h6><strong>Notice: </strong>Any admin can create,update and delete products and other items in this site.</h6>
+              <p>Are you sure you want to add this admin?</p>
+              <button type="button" class="btn btn-outline-dark btn-sm" onclick="cancelConfirmPopup()">cancel</button>
+              <button type="submit" class="btn btn-outline-danger btn-sm">add</button>
+          </div>               
+               <button type="button" class="btn btn-info btn-sm form-control" onclick="toggleConfirmPopup()">Add</button>
+
+       </form>
+    </div>
+   <%}%>
+</center>
+</div>
+
+<%-include("./partials/admin-down.ejs")%>

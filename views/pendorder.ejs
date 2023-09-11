@@ -1,0 +1,55 @@
+<%-include("./partials/admin-top.ejs") %>
+<div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">
+          <!-- recent orders  -->
+                             <div class="row">       
+                                <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+                                    <div class="card">
+                                        <h5 class="card-header"><strong>Pending Orders</strong></h5>
+                                        <div class="card-body p-0">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="bg-light">
+                                                        <tr class="border-0">
+                                                            <th class="border-0 text-Lfont">Product Name</th>
+                                                            <th class="border-0 text-Lfont">Order Id</th>
+                                                            <th class="border-0 text-Lfont">Quantity</th>
+                                                            <th class="border-0 text-Lfont">Amount</th>
+                                                            <th class="border-0 text-Lfont">Customer</th>
+                                                            <th class="border-0 text-Lfont">Order Time</th>
+                                                            <th class="border-0 text-Lfont">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                          <%orders.forEach(function(order){%>
+                                                         <tr>
+                                                            <td class="text-nowrap"><%if(order.cartId){%><strong>Bulk order</strong><%}else{%><strong><%=order.productName%></strong><%}%></td>
+                                                            <td><%=order.orderID%></td>
+                                                            <td class="text-center"><%=order.quantity%></td>
+                                                            <td><%=order.amount%></td>
+                                                            <td><%=order.firstName%></td>
+                                                            <td><%=order.date.toDateString()%>-<%=order.date.toTimeString().substring(0,9)%></td>
+                                                            <td colspan="9"><a href="/admin/order/<%=order._id%>/details" class="btn btn-outline-dark float-right text-nowrap">View Details</a></td>
+                                                        </tr>                                       
+                                             <%})%>
+    
+                                                        <tr>
+                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+                           <%if(orders.length < 1){%>
+                               <h6 class="text-center">No pending order</h6>
+                            <br>
+                            <br>
+                            <%}%>
+                       </div>
+                   </div>
+              </div>
+<%-include("./partials/admin-down.ejs") %>

@@ -1,0 +1,57 @@
+<%-include("./partials/admin-top.ejs")%>
+      <center>
+<div class="col-9 col-md-4">
+    <h3 class="head"> Add new product</h3>
+  <form enctype="multipart/form-data" class="form-Img" action="/admin/product/new" method="post">
+      <div class="form-group">
+     <input type="text" placeholder="product name" name="name" class="form-control" required>     
+              </div>
+    <div class="form-group">
+  <label>Product Image</label>
+  <div id="errorContainer1" class="error-container"></div>
+  <input type="file" id="imageInput1" name="image" class="form-control">                     
+               </div>       
+     <div class="form-group">
+   <label>Second Image(optional)</label>
+   <div id="errorContainer2" class="error-container"></div>
+  <input type="file" id="imageInput2" name="image" class="form-control">                
+               </div>
+     <div class="form-group">
+  <input type="number" placeholder="normal Price(in Naira)" name="oldPrice" class="form-control" required>            
+               </div>
+     <div class="form-group">
+  <input type="number" placeholder="discount Price(in Naira)" name="price" class="form-control" required>               
+               </div>
+       <div class="form-group">
+  <input type="number" placeholder="Available quantity" name="available" class="form-control" required>                
+               </div>            
+    <div class="form-group">
+         <p>Product description</p>
+  <textarea name="description" class="are form-control area-height" required></textarea>            
+               </div>
+       <p class="text-Lfont text-nowrap">Enter product specifications below</p>
+     <div class="specification col-md-4">
+            <p></p>
+            <div class="bt56"><h5>Property. Eg- size</h5> <h5 class="mr-56">Specication. Eg-20cm</h5></div>
+        <div class="specidiv"><input type="text" name="speci1"> <input type="text" name="quality1" class="mr-56"></div>
+        <div class="specidiv"><input type="text" name="speci2" > <input type="text" name="quality2" class="mr-56"></div>
+        <div class="specidiv"><input type="text" name="speci3" > <input type="text" name="quality3" class="mr-56"></div>
+        <div class="specidiv"><input type="text" name="speci4"> <input type="text" name="quality4" class="mr-56"></div>
+        <div class="specidiv"><input type="text" name="speci5"> <input type="text" name="quality5" class="mr-56"></div>
+               </div>
+   <div class="form-group">   
+        <P class="text-center">Select Category</p>
+         <select name="Category" required>
+     <option value="" selected>Category</option>
+           <% categories.forEach(function(category){%>
+        <option><%=category.name%></option>
+               <%})%>
+          </select>                      
+        </div>
+   <div class="form-group">
+        <button type= "submit" class="form-control btn btn-success btn-sm">New product</button>               
+       </div>                     
+     </form>
+   </div>
+</center>
+<%-include("./partials/admin-down.ejs")%>

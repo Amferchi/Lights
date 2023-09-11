@@ -1,0 +1,17 @@
+<%- include('partials/admin-top.ejs')%>
+     <div class="container"> 
+<center>
+           <br>
+        <h2>Pending support tickets</h2>
+        <br>
+         <%tickets.forEach(function(ticket){%>
+           <a href="/admin/support/tickets/<%=ticket._id%>">
+                <div class="img-thumbnail col-9 col-md-4 tick-one text-bfont">
+                        <h5 class="text-Lfont"><%=ticket.sender%></h5>
+                        <h6 class="text-Lfont"><%=ticket.subject.substring(0,35)%></h6>
+                </div>
+                </a>
+         <%})%>
+</center>
+        </div>
+<%- include('partials/admin-down.ejs')%>

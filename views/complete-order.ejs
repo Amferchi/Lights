@@ -1,0 +1,36 @@
+<%-include("./partials/header.ejs")%>
+  <div class="container">
+    <center>
+ <%if(order.status == "confirmed"){%>
+     <br>
+    <h1>Invoice has expired</h1>
+      <br>
+      <h4>Order id: <%=order.orderID%></h4>
+      <br>
+      <br>
+      <br>
+      <br>
+        <%}%>
+  <%if(order.status == "pending"){%>
+ <div class="col-9 col-md-6">
+  <div class="ord-content img-thumbnail">
+    <h4 class="text-center">Your order has been received but it's yet to be confirmed</h4>
+    <h5>Your order id is <strong><%=order.orderID%></strong></h5>
+    <h5 class="text-sm">All payments take 5mins-24hrs to confirm</h5>
+    <h5 class="text-sm">Once we confirm your payment, an email with your order details would be sent you</h5>
+    <h5 class="text-sm">Another email that includes how your product would be delivered would also be sent to you</h5>
+    <hr>
+    <div class="congs">
+        <h3>Thanks for shopping at lights o'clock</h3>
+        <p></p>
+        <a href="/"><button class="btn btn-info">Continue shopping</button></a></h5>
+    </div>
+  </div> 
+   <br>
+ <h6 class="text-sm">Email us at <strong>info@lightsoclock.com</strong> or click the contact button if you have any questions concerning your order</h6>
+   <div>
+    <%}%>
+  </center>
+ </div>
+
+<%-include("./partials/footer.ejs")%>

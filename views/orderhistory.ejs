@@ -1,0 +1,41 @@
+<%- include('partials/header.ejs')%>
+
+<div class="container">
+    <%if(orders.length > 0){%>
+     <h5>Order history</h5>
+  <table class="table-responsive table table-light table-borderless table-hover text-center mb-0 col-lg-6 mb-5">
+    <thead>
+        <tr>
+            <th>product</th>
+            <th>quantity</th>
+            <th>price</th>
+            <th>Total price</th>
+            <th>date of order</th>
+        </tr>
+    </thead>
+    <tbody class="align-middle">
+ <%orders.forEach(function(corder){%>
+    <%corder.cart.forEach(function(order){%>
+         <tr> 
+    <td class="align-middle"><%=order.name%></td>
+    <td class="align-middle"><%=order.quantity%></td>
+    <td class="align-middle"><%=currency%><%=order.price%></td>
+    <td class="align-middle"><%=currency%><%=order.total%></td>
+    <td class="align-middle"><%=corder.date.toDateString()%></td>
+        </tr>
+    <%})%>
+ <%})%>
+
+    </tbody>
+  </table>
+    <%}else{%>
+        <h4> You currently do not have any orders</h4>
+         <a href="/"><button class="btn btn-bd-ra btn-info">Start shopping</button></a>
+        <%}%>
+
+</div>
+
+
+
+
+<%- include('partials/footer.ejs')%>

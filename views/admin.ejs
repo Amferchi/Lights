@@ -1,0 +1,143 @@
+ <%-include("./partials/admin-top.ejs")%>
+        <!-- wrapper  -->
+        <!-- ============================================================== -->
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Admin Dashboard</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end pageheader  -->
+                    <div class="ecommerce-widget">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Total revenue</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1"><%=currency%><%=calorder.reduce((acc,obj)=>{
+                                                return acc + obj.amount
+                                            },0)%></h1>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Total orders</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1"><%=calorder.length%></h1>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue2"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Refunds</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1">0.00</h1>
+                                        </div>
+                                        <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
+                                            <span>N/A</span>
+                                        </div>
+                                    </div>
+                                    <div id="sparkline-revenue3"></div>
+                                </div>
+                            </div>
+                            </div>
+      
+            <%if(search){%>
+                <%if(orders.length > 0){%>
+                    <h3 class="text-center ca-go">Order id that match your search <strong>"<%=search%>"</strong></h3>
+                    <center><a href="/admin/234crvS554#"><button class="btn btn-sm btn-warning btn-bd-ra"><span class="fa fa-angle-left"></span> go back</button></a></center>
+                      <hr>
+                <%}else{%>
+                      <h3 class="text-center ca-go">No order id match your search <strong>"<%=search%>"</strong></h3>
+                      <center><a href="/admin/234crvS554#"><button class="btn btn-sm btn-warning btn-bd-ra"><span class="fa fa-angle-left"></span> go back</button></a></center>
+                    <%}%>
+            <%}%>
+    <br> 
+                     <h6 class="text-center text-bfont">Click product name to view more details</h6>
+                      <P></P>
+                             <!-- recent orders  -->
+                        <div class="row">       
+                            <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header"><strong>Orders</strong></h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0 bfont text-Lfont">Product Name</th>
+                                                        <th class="border-0 bfont text-Lfont">Order Id</th>
+                                                        <th class="border-0 bfont text-Lfont">Quantity</th>
+                                                        <th class="border-0 bfont text-Lfont">Amount</th>
+                                                        <th class="border-0 bfont text-Lfont">Customer</th>
+                                                        <th class="border-0 bfont text-Lfont">Order Time</th>
+                                                        <th class="border-0 bfont text-Lfont ">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                      <%orders.forEach(function(order){%>
+                                                     <tr>
+                                                        <td><a href="/admin/order/<%=order._id%>/details"><%if(order.cart.length > 0){%><strong>Bulk Order</strong><%}else{%><strong><%=order.productName%></strong><%}%></a></td>
+                                                        <td><%=order.orderID%></td>
+                                                        <td><%=order.quantity%></td>
+                                                        <td><%=order.amount%></td>
+                                                        <td><%=order.firstName%></td>
+                                                        <td><%=order.date.toDateString()%>-<%=order.date.toTimeString().substring(0,9)%></td>
+                                                        <td><button class="btn-bd-ra status-<%=order.status%>"><%=order.status%></button></td>
+                                                    </tr>                                       
+                                         <%})%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <div class="col-xl-3 col-lg-12 col-md-6 col-sm-12 col-12">
+                                <!-- top perfomimg  -->
+                                <div class="card">
+                                    <h5 class="card-header text-nowrap"><strong>Top Performing Products</strong></h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table no-wrap p-table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0 text-Lfont">Product</th>
+                                                        <th class="border-0 text-Lfont">Orders</th>
+                                                        <th class="border-0 text-Lfont">Revenue</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                            <%product.forEach(function(product){%>
+                                                    <tr>
+                                                        <td class="text-nowrap"><a href="/products/<%=product._id%>"><%=product.name%></a></td>
+                                                        <td class="text-center"><%=product.orders%></td>
+                                                        <td><%=currency%><%=product.revenue%></td>
+                                                    </tr>                                                
+                                           <%})%>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- end product category  -->
+                            </div>
+                        </div>
+                </div>
+            </div>
+<%-include("./partials/admin-down.ejs")%>

@@ -1,0 +1,30 @@
+<%- include('partials/admin-top.ejs')%>
+     <div class="container">
+        <center>
+                <br>
+            <h5><strong><%=ticket.subject%></strong>- <small class="text-sm"><%=ticket.date.toDateString()%></small></h5>
+              <br>
+            <div class="col-9 col-md-4 jumbotron">
+                <h5 class="text-Lfont">sender</h5>
+                  <h6 class=""><%=ticket.sender%></h6>
+                <h5 class="text-Lfont">Email</h5>
+                  <h6 class=""><%=ticket.email%></h6>
+                  <div class="img-thumbnail">
+                <h4 class="text-Lfont text-underline">Information</h4> 
+                <h4 class="text-sm"><%=ticket.text%></h4>
+                  </div>
+            </div>
+             <br>
+          <h3>REPLY TICKET</h3>
+          <hr>
+          <form method="post" action="/admin/support/tickets/<%=ticket._id %>" class="col-9 col-md-4">
+               <label>response header</label>
+               <input type="text" name="header" class="form-control" required>
+               <label>Information</label>
+               <textarea name="text" class="form-control" required style="height: 200px;"></textarea>
+               <button class="form-control btn-bd-ra btn-warning">Send</button>
+          </form>
+   </center>
+   <br>
+        </div>
+<%- include('partials/admin-down.ejs')%>

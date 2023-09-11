@@ -1,0 +1,38 @@
+<%-include("./partials/admin-top.ejs")%>
+<div class="container">
+<center>
+
+    <div class="">
+        <h3>Categories</h3>
+     <%categories.forEach(function(category,index){%>
+     <div class="jumbotron col-9 col-md-4 contain">
+         <h4><%=category.name%></h4>
+          <img class="img-thumbnail" src="<%=category.image%>">
+          <% var popupId = "popup-" + index; %>
+          <!-- add unique ID to pop-up element -->
+                 <div id="<%= popupId %>" class="popup form-delete">
+                           <h5 class="text-Lfont">Are you sure you want to delete this category?</h5>
+                      <form action="/admin/delete/<%=category._id%>/category" method="post">
+                          <button type="button" class="btn-sm btn-bd-ra btn btn-outline-dark" onclick="closeDeletePopup('<%= popupId %>')">Cancel</button>
+                         <button class="btn btn-danger btn-bd-ra con-ord-btn btn-sm" type="submit">Remove</button>
+                      </form>            
+                </div>
+          <button class="text-center btn-danger btn-bd-ra con-ord-btn btn-sm btn-delete" onclick="toggleDeletePopup('<%= popupId %>')">Delete</button>
+            </div>
+     <%})%>
+ </div>
+ <div class="col-9 col-md-4 ">
+    <h3 class="head"> Add new category</h3>
+         <form class="" action="/admin/category/new" method="post" enctype="multipart/form-data">
+               <input type="text" placeholder="category name" class="form-control" name="name" required>
+               <label class="inp-lab">Image</label>
+               <div id="errorContainer2" class="error-container"></div>
+               <input type="file" id="imageInput2" placeholder="category image" class="form-control" name="image" required>
+               <p></p>
+               <button class="btn btn-info btn-sm form-control">Add</button>
+       </form>
+    </div>
+</center>
+</div>
+<br>
+<%-include("./partials/admin-down.ejs")%>

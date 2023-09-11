@@ -1,0 +1,104 @@
+<%-include("./partials/header.ejs")%>
+
+       <!-- Breadcrumb Start -->
+       <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="/">Home</a>
+                    <span class="breadcrumb-item active">Checkout</span>
+                </nav>
+            </div>
+        </div>
+    <!-- Breadcrumb End -->
+    <center>  
+      <%if(product.available < 1){%>
+          <h5 class="text-bfont">Page has expired</h5>
+          <br>
+          <br>
+          <br>
+      <%}else{%>
+          <h4 class="text-Lfont">Billing address</h4>
+     <p></p>
+
+   <form action="/confirm-order/<%=product._id%>" method="post">
+
+   <div class="payment-form col-md-4">
+     <label class="pay-lab">Product name</label>
+    <input class="form-control" value="<%-product.name%>" disabled> 
+    <p></p>
+     <label class="pay-lab">Price</label>
+     <input type="text" value="<%=currency%><%=product.price%>" class="form-control" disabled required>
+     <label class="pay-lab">Quantity</label>
+     <input type="text"  name="quantity" value="1" disabled class="form-control" required>
+     <label class="pay-lab">First name</label>
+     <input type="text"  name="firstName" class="form-control" required>
+     <label class="pay-lab">last name</label>
+     <input type="text"  name="lastName" class="form-control" required>
+     <label class="pay-lab">Email address</label>
+     <input type="email" name="email" class="form-control" required>
+     <label class="pay-lab">Phone number</label>
+     <input type="Number"  name="mobile" class="form-control" minlength="11" required>
+     <label class="pay-lab">State</label>
+   <select name="state" class="form-control text-bfont" required>
+      <option value="" disabled selected>Select State</option>
+      <option value="Abia">Abia</option>
+      <option value="Adamawa">Adamawa</option>
+      <option value="Akwa Ibom">Akwa Ibom</option>
+      <option value="Anambra">Anambra</option>
+      <option value="Bauchi">Bauchi</option>
+      <option value="Bayelsa">Bayelsa</option>
+      <option value="Benue">Benue</option>
+      <option value="Borno">Borno</option>
+      <option value="Cross River">Cross River</option>
+      <option value="Delta">Delta</option>
+      <option value="Ebonyi">Ebonyi</option>
+      <option value="Edo">Edo</option>
+      <option value="Ekiti">Ekiti</option>
+      <option value="Enugu">Enugu</option>
+      <option value="FCT">Federal Capital Territory</option>
+      <option value="Gombe">Gombe</option>
+      <option value="Imo">Imo</option>
+      <option value="Jigawa">Jigawa</option>
+      <option value="Kaduna">Kaduna</option>
+      <option value="Kano">Kano</option>
+      <option value="Katsina">Katsina</option>
+      <option value="Kebbi">Kebbi</option>
+      <option value="Kogi">Kogi</option>
+      <option value="Kwara">Kwara</option>
+      <option value="Lagos">Lagos</option>
+      <option value="Nasarawa">Nasarawa</option>
+      <option value="Niger">Niger</option>
+      <option value="Ogun">Ogun</option>
+      <option value="Ondo">Ondo</option>
+      <option value="Osun">Osun</option>
+      <option value="Oyo">Oyo</option>
+      <option value="Plateau">Plateau</option>
+      <option value="Rivers">Rivers</option>
+      <option value="Sokoto">Sokoto</option>
+      <option value="Taraba">Taraba</option>
+      <option value="Yobe">Yobe</option>
+      <option value="Zamfara">Zamfara</option>
+  </select>
+     <label class="pay-lab">City</label>
+     <input type="text"  name="city" class="form-control" required>
+     <label class="pay-lab">Address</label>
+     <input type="text"  name="address" class="form-control" required>
+     <p></p>
+   <h5>Select payment method</h5>
+    <input type="radio" name="method" value="Bank Transfer" id="bank-transfer-btn" required>
+    <label for="bank-transfer-btn">Bank Transfer</label><br>
+
+    <input type="submit" value="proceed" id="proceed-btn" class="btn btn-primary pay-btn form-control">
+   </div>
+
+  </form>
+        <%}%>
+
+  </center>
+
+</div>
+
+
+
+<%-include("./partials/footer.ejs")%>

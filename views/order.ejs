@@ -1,0 +1,58 @@
+<%-include("./partials/header.ejs")%>
+<div class="container">
+    <center style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+        <%if(order.status == "pending"){%>
+            <h4>Order is being processed<span class="text-danger">...</span></h4>
+            <p></p>
+            <h6>Order id: <%=order.orderID%></h6>
+            <br>
+            <br>
+            <br><br>
+            <%}%>
+
+     <%if(order.status == "confirmed"){%>
+         <br>
+        <h1>Invoice has expired</h1>
+          <br>
+          <h4>Order id: <%=order.orderID%></h4>
+          <br>
+          <br>
+          <br>
+          <br>
+            <%}%>
+
+  <%if(order.status !== "pending" && order.status !== "confirmed"){%>
+        <h2>Complete your payment</h2>
+        <br>
+    <div class="col-md-4 col-9 img-thumbnail">
+        <input class="text-bfont text-Lfont form-control" value="Subtotal: <%=currency%><%=order.amount%>" disabled>
+        <input class="text-bfont text-Lfont form-control" value="Delivery: <%=currency%><%=order.delivery%>" disabled>
+        <input class="text-bfont text-Lfont form-control" value="Total: <%=currency%><%=order.amount + order.delivery%>" disabled>
+    </div>
+    <p></p>
+    <div class="pay-account col-9 col-md-4">
+        <h5 class="text-sm">Order ID: <strong><%=order.orderID%></strong></h5> 
+         <h5 class="text-sm">Send <strong><%=currency%><%=order.amount + order.delivery%></strong> to the account below</h5>
+        
+    </div>
+           <div class="img-thumbnail acc-hold col-9 col-md-4">
+              <h5>Bank name: <span class="text-Lfont"><%=pay.bank%></span></h5>
+              <h5>Account name <span class="text-Lfont"><%=pay.name%></span></h5>
+              <h5>Account number <strong><%=pay.accNum%></strong></h5>
+           </div>
+    <div class="proof-order col-9 col-md-4">
+        <h4>Submit payment receipt</h4>
+        <form enctype="multipart/form-data" class="form-Img" method="post" action="/complete-order/<%=order.id%>" >
+            <label>Enter sender account number</label>
+            <input type="number" name="accNum" required>
+            <label>Enter transaction receipt below</label>
+            <div id="errorContainer2" class="error-container"></div>
+            <input type="file" id="imageInput2" class="order-receipt form-control" name="image" required>
+            <p></p>
+            <button class="btn btn-info btn-bd-ra form-control">Complete order</button>
+        </form>            
+            <%}%>
+</center>
+</div>
+
+<%-include("./partials/footer.ejs")%>

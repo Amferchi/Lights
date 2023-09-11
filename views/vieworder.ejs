@@ -1,0 +1,105 @@
+<%-include("./partials/admin-top.ejs") %>
+<div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">    
+            <center>
+              <%if(order.cartId){%>
+                  <h4 class="text-bfont text-Lfont">Order: <%=order.orderID%></h4>
+                  <h6 class="text-bfont text-Lfont">Status: <button class="btn-bd-ra status-<%=order.status%>"><%=order.status%></button></h6>
+                      <h4>Order details</h4>
+                      <table class="table-responsive table table-light table-borderless table-hover text-center mb-0" style="width:350px;">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>SubTotal</th>
+                            </tr>
+                         </thead>
+                        <tbody>
+                      <%order.cart.forEach(function(porder){%>
+                            <tr>
+                          <td><%=porder.name%></td>
+                          <td><%=porder.quantity%></td>
+                          <td><%=currency%><%=porder.price%></td>
+                          <td><%=currency%><%=porder.total%></td>
+                            </tr>
+                        <%})%>
+                        </tbody>
+                     </table>
+                     <h5><strong>Total:</strong><%=currency%><%=order.amount + order.delivery%></h5>
+              <%}%>
+
+              <%if(order.productId){%>
+                <h4>Order: <%=order.orderID%></h4>
+                <h6 class="text-bfont text-Lfont">Status: <button class="btn-bd-ra status-<%=order.status%>"><%=order.status%></button></h6>
+                <div class="img-thumbnail bg-dark col-9 col-md-4">
+                    <h4 class="text-light">Order details</h4>
+                    <h5 class="text-Lfont text-light">Product name: <span class="text-capitalize"><%=order.productName%></span></h5>
+                    <h5 class="text-Lfont text-light">Quantity: <%=order.quantity%></h5>
+                    <h5 class="text-Lfont text-light">Price: <%=currency%><%=order.amount%></h5>
+                    <h5 class="text-Lfont text-light">Delivery: <%=currency%><%=order.delivery%></h5>
+                    <h5 class="text-Lfont text-light">Total: <%=currency%><%=order.amount + order.delivery%></h5>
+                    
+                  </div>
+               <%}%>
+                  <%if(order.status !== "In-progress"){%>
+                              <br>
+                       <div class="img-thumbnail col-9 col-md-4">
+                               <br>
+                          <h3 class="text-Lfont">Payment proof</h3>
+                                <p></p>
+                            <%if(order.receipt){%>
+                                <h5 class="text-Lfont">payment receipt</h5>
+                                <a href="https://lightsoclock.com/<%=order.receipt%>"><img id="ord-receipt" class="img thumbnail col-6" src="<%=order.receipt%>"></a>
+                            <%}%>
+                            <p></p>
+                            <%if(order.accNum){%>
+                                <h5 class="text-Lfont">Sender account number</h5>
+                                <h4><strong><%=order.accNum%></strong></h4>
+                              <%}%>
+                       </div>
+                         <%}%>
+                          <p></p>
+                      <div class="jumbotron col-9 col-md-4">
+                        <h3>Contact info</h3>
+                           <p></p>
+                           <h4 class=" text-sm"><strong>Firstname: </strong><%=order.firstName %></h4>
+                           <p></p>
+                           <h4 class=" text-sm"><strong>Lastname: </strong><%=order.lastName %></h4>
+                           <p></p>
+                           <h4 class=" text-sm"><strong>Email address: </strong><%=order.email %></h4>
+                           <p></p>
+                           <h4 class=" text-sm"><strong>State: </strong><%=order.state %></h4>
+                           <p></p>
+                           <h4 class=" text-sm"><strong>City: </strong><%=order.city%></h4>
+                           <p></p>
+                           <h4 class=" text-sm"><strong>Contact address: </strong><%=order.address %></h4>
+                           <p></p>
+                           <h4 class=" text-sm"><strong>Phone number: </strong><%=order.mobile %></h4>
+                     </div>
+                         <%if(order.status == "pending"){%>
+                           <div id="confirm-ord" class="popup form-delete">
+                                     <h5 class="text-Lfont">Are you sure you want to confirm this order?</h5>
+                                    <form action="/admin/confirm-order/<%=order._id%>" method="post">
+                                      <button type="button" class="btn-sm btn-bd-ra btn btn-outline-dark" onclick="cancelOrderPopup()">Cancel</button>    
+                                      <button type="submit" class="btn btn-warning btn-bd-ra con-ord-btn">Confirm</button>
+                                  </form>     
+                          </div>
+                    <button type="button" class="text-center btn-info btn-bd-ra con-ord-btn btn-sm btn-delete" onclick="toggleOrderPopup()">Confirm</button>
+                 <br>                          
+                          <%}%>
+
+                 <div class="col-9 col-md-4">
+                    <form action="/admin/order/<%=order._id%>/email-response" method="post">
+                        <label>Response</label>
+                        <textarea class="form-control" name="response"></textarea>
+                        <p></p>
+                        <button class="btn form-control btn-primary">Send</button>
+                    </form>
+                 </div>             
+            </center>
+        </div>
+      </div>
+  </div>
+<%-include("./partials/admin-down.ejs") %>

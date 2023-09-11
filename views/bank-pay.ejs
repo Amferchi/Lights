@@ -1,0 +1,54 @@
+<%-include("./partials/admin-top.ejs")%>
+  <div class="container">
+    <br>
+    <br>
+     <center>
+        <%pay.forEach(function(acc,index){%>
+          <% var popupId = "popup-" + index; %>
+             <div class="img-thumbnail col-9 col-md-4 bfont contain">
+                  <%if(acc.tag == "current"){%>
+                      <h5 class="bg-blue">In use <span class="fa fa-check"></span></h5>
+                  <%}%>
+                  <h6 class="text-Lfont">Account Number</h6>
+                        <h6 class="text-Lfont"><%=acc.accNum%></h6>
+                  <h6 class="text-Lfont">Bank</h6>
+                   <h6 class="text-Lfont"><%=acc.bank%></h6>
+                  <h6 class="text-Lfont">Account Name</h6>
+                  <h6 class="text-Lfont"><%=acc.name%></h6>
+                  <p></p>
+                  <form action="/admin/payment-accounts/<%=acc._id%>/update" method="post">
+                    <button class="btn btn-info btn-sm" <%if(acc.tag == "current"){%>disabled<%}%>>Set as default account</button>
+                  </form>
+                  <p></p>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="toggleDeletePopup('<%= popupId %>')" <%if(pay.length == 1){%>disabled<%}%>>Delete account</button>
+              <div id="<%= popupId %>" class="popup form-delete">
+                    <p class="text-Lfont dpbank">Are you sure you want to Delete this bank account?</p>
+                  <form action="/admin/payment-accounts/<%=acc._id%>/delete" method="post">
+                   <button type="button" class="btn-sm btn-bd-ra btn btn-outline-dark" onclick="closeDeletePopup('<%= popupId %>')">Cancel</button>
+                  <button class="btn btn-danger btn-bd-ra con-ord-btn btn-sm" type="submit">delete</button>
+               </form>       
+         </div>
+             </div>
+             <br>
+        <%})%>
+              <br>
+              <br>
+        <div class="col-9 col-md-4 ">
+                   <h3>Add new account number</h3>
+                 <p></p>
+              <form action="/admin/payment-accounts/create" method="post">
+                   <label>Account Number</label>
+                   <input type="number" class="form-control" name="payAcc[accNum]" required>
+                   <label>Bank</label>
+                   <input type="text" class="form-control" name="payAcc[bank]" required>
+                   <label>Account Name</label>
+                   <input type="text" class="form-control" name="payAcc[name]" required>  
+                   <p></p>              
+                   <button class="btn btn-primary form-control btn-bd-ra">Add</button>
+              </form>
+        </div>
+     </center>
+  </div>
+      <br>
+      <br>
+<%-include("./partials/admin-down.ejs")%>
